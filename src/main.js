@@ -20,7 +20,7 @@ const whiteList = ['/login'];
   router.beforeEach((to, from, next) => {
   NProgress.start(); // 开启Progress
   if (store.getters.userInfo) {
-    if (to.path === '/login') {
+    if (to.path === './login') {
       next();
     }else{
       store.dispatch('GenerateRoutes', "").then(() => {
@@ -31,7 +31,7 @@ const whiteList = ['/login'];
     if (whiteList.indexOf(to.path) !== -1) { // 在免登录白名单，直接进入
       next();
     } else {
-      next('/login');  // 否则全部重定向到登录页
+      next('./login');  // 否则全部重定向到登录页
       NProgress.done(); // 在hash模式下 改变手动改变hash 重定向回来 不会触发afterEach 暂时hack方案 ps：history模式下无问题，可删除该行！
     }
   }

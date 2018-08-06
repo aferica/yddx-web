@@ -84,7 +84,7 @@
   .login {
     width: 100%;
     height: 100%;
-    background-image: url("../assets/bg1.jpg");
+    background-image: url("../../assets/bg1.jpg");
     background-size: cover;
     background-position: center;
     position: relative;

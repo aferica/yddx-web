@@ -25,7 +25,7 @@ export const constantRouterMap = [
     },
     hidden: true,
     component: resolve => {
-      require(['../views/login.vue'], resolve);
+      require(['../views/login/login.vue'], resolve);
     }
   },
   {

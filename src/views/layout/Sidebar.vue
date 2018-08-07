@@ -3,9 +3,9 @@
     <div class="logo-con" :style="{background: menuTheme !== 'dark'?'#495060':''}">
       <!-- <a @click="herfchange" v-show="!sidebar"><img src="../../assets/jahuar.png" class="maxlogo"/></a>
       <a @click="herfchange" v-show="sidebar"><img src="../../assets/leopard.png"/></a> -->
-      <div @click="herfchange" class="logo">移动党校</div>
+      <div @click="herfchange" class="logo" v-show="sidebar">移动党校</div>
     </div>
-    <Menu v-if="!sidebar" ref="sideMenu" :active-name="$route.path" :theme="menuTheme" :open-names="openedSubmenuArr"
+    <Menu v-if="sidebar" ref="sideMenu" :active-name="$route.path" :theme="menuTheme" :open-names="openedSubmenuArr"
           width="auto" @on-select="changeMenu">
       <template v-for="item in permission_routers" v-if="item.hidden!=true">
         <MenuItem v-if="item.children.length<=1" :name="item.path+'/'+item.children[0].path"
@@ -29,7 +29,7 @@
       </template>
     </Menu>
 
-    <div v-else-if="sidebar">
+    <div v-else-if="!sidebar">
       <template v-for="(item, index) in permission_routers" v-if="item.hidden!=true">
         <div :key="index" class="shrink">
           <Dropdown transfer v-if="item.children.length !== 1" placement="right-start" :key="index"

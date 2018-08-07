@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="logo-con" :style="{background: menuTheme !== 'dark'?'#495060':''}">
-      <!-- <a @click="herfchange" v-show="!sidebar"><img src="../../assets/jahuar.png" class="maxlogo"/></a>
-      <a @click="herfchange" v-show="sidebar"><img src="../../assets/leopard.png"/></a> -->
-      <div @click="herfchange" class="logo" v-show="sidebar">移动党校</div>
+    <div class="logo-con" :style="{background: '#fff'}">
+      <a @click="herfchange"><img src="../../assets/danghui.jpg" class="maxlogo"/></a>
+      <!-- <a @click="herfchange" v-show="sidebar"><img src="../../assets/leopard.png"/></a> -->
+      <div @click="herfchange" class="logo"  v-show="!sidebar">移动党校</div>
     </div>
-    <Menu v-if="sidebar" ref="sideMenu" :active-name="$route.path" :theme="menuTheme" :open-names="openedSubmenuArr"
+    <Menu v-if="!sidebar" ref="sideMenu" :active-name="$route.path" :theme="menuTheme" :open-names="openedSubmenuArr"
           width="auto" @on-select="changeMenu">
       <template v-for="item in permission_routers" v-if="item.hidden!=true">
         <MenuItem v-if="item.children.length<=1" :name="item.path+'/'+item.children[0].path"
@@ -29,7 +29,7 @@
       </template>
     </Menu>
 
-    <div v-else-if="!sidebar">
+    <div v-else-if="sidebar">
       <template v-for="(item, index) in permission_routers" v-if="item.hidden!=true">
         <div :key="index" class="shrink">
           <Dropdown transfer v-if="item.children.length !== 1" placement="right-start" :key="index"
@@ -101,10 +101,22 @@
 
 <style lang="less">
   .logo {
-    line-height: 65px;
-    color: #ffffff;
+    line-height: 44px;
+    color: #0a0a0a;
     font-size: 28px;
     text-align: center;
+  }
+
+  .logo-con {
+    display: flex;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box; /* Firefox */
+    -webkit-box-sizing:border-box; /* Safari */
+    border-bottom: 1px solid #eeeeee;
+  }
+
+  .maxlogo {
+    width: 44px;
   }
 
   .shrink {

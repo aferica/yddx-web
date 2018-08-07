@@ -3,7 +3,7 @@ import {otherRouterMap, constantRouterMap} from '../../router';
 
 const app = {
   state: {
-    sidebar: !+Cookies.get('sidebarStat'),
+    sidebar: 0,
     routers: constantRouterMap,
     menuTheme: 'light',
     currentPathArr: [],

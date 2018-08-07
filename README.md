@@ -1,5 +1,3 @@
-# lepoard vue iview admin https://autors.github.io/vueleopard
-## Version：v0.5
 
 ## Introduction
 ```
@@ -78,11 +76,3 @@ server {
  └── static   引入第三方目录
 ```
 
-
-## Display
-
-- home
-![](readme_static/main.png)
-
-## License
-[MIT](http://opensource.org/licenses/MIT)

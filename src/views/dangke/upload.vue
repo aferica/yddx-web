@@ -20,7 +20,7 @@
     data () {
       return {
         options: {
-          target: '//127.0.0.1:3000/api/cos/upload/big/upload?key=video/dangke',
+          target: process.env.BASE_API + '/api/cos/upload/big/upload?key=video/dangke',
           testChunks: false,
           // singleFile: true,
         },

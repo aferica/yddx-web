@@ -28,7 +28,7 @@
     data () {
       return {
         options: {
-          target: '/api/cos/upload/multipart',
+          target: '/yddxapi/api/cos/upload/multipart',
           testChunks: false,
           singleFile: true,
           chunkSize: 2*1024*1024
@@ -61,7 +61,7 @@
         const filetype = filename.split('.')[filename.split('.').length - 1]
         filename = md5(filename) + '.' + filetype
         file.name = filename
-        const result = await axios.get('/api/cos/upload/multipart/key?identifier=' +
+        const result = await axios.get('/yddxapi/api/cos/upload/multipart/key?identifier=' +
           encodeURIComponent(file.uniqueIdentifier) + '&filename=' + filename)
         .then(res => {
           // console.log(res)
@@ -77,7 +77,7 @@
       },
       async multipartComplete (file) {
         console.log(file)
-        const result = axios.get('/api/cos/upload/complete?identifier=' + encodeURIComponent(file.uniqueIdentifier))
+        const result = axios.get('/yddxapi/api/cos/upload/complete?identifier=' + encodeURIComponent(file.uniqueIdentifier))
         .then(res => {
           console.log(res)
           if(res.data.code == 0) {

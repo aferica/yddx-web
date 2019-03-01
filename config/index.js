@@ -29,11 +29,11 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': {
-        target: 'http://localhost:4040',//后端接口地址
+      '/yddxapi': {
+        target: 'https://api.rgznyddx.com',//后端接口地址
         changeOrigin: true,//是否允许跨越
         pathRewrite: {
-            '^/api': '/api',//重写,
+            '^/yddxapi': '',//重写,
         }
       }
     },

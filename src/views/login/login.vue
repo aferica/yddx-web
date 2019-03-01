@@ -63,7 +63,7 @@
               user_name: this.form.userName,
               password: md5(this.form.password)
             }
-            axios.post( '/api/user/login', param)
+            axios.post( '/yddxapi/api/user/login', param)
             .then(res => {
               console.log(res.data)
               if(res.data.code == 0) {

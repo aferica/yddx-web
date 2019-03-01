@@ -59,10 +59,13 @@
       handleSubmit () {
         this.$refs.loginForm.validate((valid) => {
           if (valid) {
-            this.form.password = md5(this.form.password)
-            axios.post( process.env.BASE_API + '/api/user/login', this.form)
+            const param = {
+              user_name: this.form.userName,
+              password: md5(this.form.password)
+            }
+            axios.post( '/api/user/login', param)
             .then(res => {
-              console.log(res)
+              console.log(res.data)
               if(res.data.code == 0) {
                 let userInfo = res.data.data
                 userInfo.userName = userInfo.user_name

@@ -1,4 +1,4 @@
 module.exports = {
   NODE_ENV: '"production"',
-  BASE_API: '"https://yddx.aferica.wang"',
+  BASE_API: '"https://api.rgznyddx.com"',
 }

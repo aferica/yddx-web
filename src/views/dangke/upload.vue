@@ -1,6 +1,11 @@
 <template>
   <div class="dangke-upload-container">
-    <uploader ref="uploader" :options="options" class="uploader-example"  @complete="complete" :file-status-text="statusText" >
+    <uploader ref="uploader" class="uploader-example"
+      :options="options"
+      :autoStart="autoStart"
+      :file-status-text="statusText"
+      @file-added="getFileKeyAndUploadId"
+      @file-complete="multipartComplete" >
       <uploader-unsupport></uploader-unsupport>
       <uploader-drop>
         <!-- <p>Drop files here to upload or</p> -->
@@ -15,17 +20,22 @@
 
 <script>
   import {mapGetters} from 'vuex'
+  import axios from 'axios'
+  import md5 from 'js-md5'
+
   export default {
     name: 'upload',
     data () {
       return {
         options: {
-          target: process.env.BASE_API + '/api/cos/upload/big/upload?key=video/dangke',
+          target: '/api/cos/upload/multipart',
           testChunks: false,
-          // singleFile: true,
+          singleFile: true,
+          chunkSize: 2*1024*1024
         },
+        autoStart: false,
         attrs: {
-          accept: 'video/*'
+          // accept: 'video/*'
         },
         statusText: {
           success: '上传成功',
@@ -42,9 +52,44 @@
       })
     },
     methods: {
-      complete () {
-        console.log('complete', arguments)
+      // complete () {
+      //   console.log('complete', arguments)
+      // },
+      async getFileKeyAndUploadId (file) {
+        // console.log(file.uniqueIdentifier)
+        let filename = file.name
+        const filetype = filename.split('.')[filename.split('.').length - 1]
+        filename = md5(filename) + '.' + filetype
+        file.name = filename
+        const result = await axios.get('/api/cos/upload/multipart/key?identifier=' +
+          encodeURIComponent(file.uniqueIdentifier) + '&filename=' + filename)
+        .then(res => {
+          // console.log(res)
+          if(res.data.code == 0) {
+            return true
+          }
+          return false
+        })
+        if(result) {
+          file.resume()
+        }
+        return false
       },
+      async multipartComplete (file) {
+        console.log(file)
+        const result = axios.get('/api/cos/upload/complete?identifier=' + encodeURIComponent(file.uniqueIdentifier))
+        .then(res => {
+          console.log(res)
+          if(res.data.code == 0) {
+            // window.uploader.upload()
+          } else {
+            return false
+          }
+        })
+        if(!result) {
+          return false
+        }
+      }
     },
   }
 </script>

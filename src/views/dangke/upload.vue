@@ -35,7 +35,7 @@
         },
         autoStart: false,
         attrs: {
-          // accept: 'video/*'
+          accept: 'video/*'
         },
         statusText: {
           success: '上传成功',
